@@ -11,6 +11,17 @@ options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")
     npgsqlOptions.CommandTimeout(60); // Timeout in seconds
 }));
 
+// Add CORS policy
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+    policy =>
+    {
+        policy.WithOrigins("http://localhost:5173") // Update with your frontend URL
+    .AllowAnyHeader()
+    .AllowAnyMethod();
+    });
+});
 
 builder.Services.AddControllers();
 
@@ -26,6 +37,7 @@ using (var scope = app.Services.CreateScope())
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
+    app.UseCors("AllowSpecificOrigin"); // Use CORS policy in development
 }
 
 app.UseHttpsRedirection();

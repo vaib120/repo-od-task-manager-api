@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using TaskManagementApi.Data;
 using TaskManagementApi.Models;
+using System;
 
 namespace TaskManagementApi.Controllers
 {
@@ -21,32 +22,67 @@ namespace TaskManagementApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TaskItem>>> GetTasks()
         {
-            return await _context.Tasks.ToListAsync();
+            try
+            {
+                var tasks = await _context.Tasks.ToListAsync();
+                return Ok(tasks);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (ex) using Azure Application Insights
+                return StatusCode(500, "Internal server error");
+            }
         }
 
         [HttpPost]
-        public async Task<ActionResult<TaskItem>> PostTask(TaskItem task)
+        public async Task<ActionResult<TaskItem>> PostTask([FromBody] TaskItem task)
         {
-            task.CreatedAt = DateTime.UtcNow;
-            _context.Tasks.Add(task);
-            await _context.SaveChangesAsync();
+            if (task == null)
+            {
+                return BadRequest("Task is null");
+            }
 
-            return CreatedAtAction(nameof(GetTasks), new { id = task.Id }, task);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                task.CreatedAt = DateTime.UtcNow;
+                _context.Tasks.Add(task);
+                await _context.SaveChangesAsync();
+
+                return CreatedAtAction(nameof(GetTasks), new { id = task.Id }, task);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (ex) using Azure Application Insights
+                return StatusCode(500, "Internal server error");
+            }
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTask(int id)
         {
-            var task = await _context.Tasks.FindAsync(id);
-            if (task == null)
+            try
             {
-                return NotFound();
+                var task = await _context.Tasks.FindAsync(id);
+                if (task == null)
+                {
+                    return NotFound();
+                }
+
+                _context.Tasks.Remove(task);
+                await _context.SaveChangesAsync();
+
+                return NoContent();
             }
-
-            _context.Tasks.Remove(task);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            catch (Exception ex)
+            {
+                // Log the exception (ex) using Azure Application Insights
+                return StatusCode(500, "Internal server error");
+            }
         }
     }
 }

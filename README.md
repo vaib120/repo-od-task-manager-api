@@ -77,6 +77,8 @@ The API will be available at http://localhost:8080 or http://localhost:19551.
 docker logs taskmanagementapi
 ```
 
+## Import TaskManger.postman_collection.json file to test the validations for TasksController
+
 ---
 
 ## License

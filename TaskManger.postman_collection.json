@@ -1,0 +1,166 @@
+{
+	"info": {
+		"_postman_id": "db6dade6-f803-4078-8ce1-f9f3d1a43e23",
+		"name": "TaskManger",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4629449"
+	},
+	"item": [
+		{
+			"name": "http://localhost:19551/api/tasks",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"description\": \"Complete the project documentation\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:19551/api/tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "19551",
+					"path": [
+						"api",
+						"tasks"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST \"http://localhost:19551/api/tasks\" -H \"Content-Type: application/json\" -d '{\"description\": \"Complete the project documentation\"}'"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:19551/api/Tasks",
+			"request": {
+				"method": "POST",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:19551/api/tasks",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:19551/api/tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "19551",
+					"path": [
+						"api",
+						"tasks"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST \"http://localhost:19551/api/tasks\" -H \"Content-Type: application/json\" -d '{}'"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:19551/api/tasks(printf",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"description\": \"$",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:19551/api/tasks(printf",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "19551",
+					"path": [
+						"api",
+						"tasks(printf"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST \"http://localhost:19551/api/tasks\" -H \"Content-Type: application/json\" -d '{\"description\": \"'$(printf 'a%.0s' {1..201})'\"}'"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:19551/api/tasks/999",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:19551/api/tasks/999",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "19551",
+					"path": [
+						"api",
+						"tasks",
+						"999"
+					]
+				},
+				"description": "Generated from cURL: curl -X DELETE \"http://localhost:19551/api/tasks/999\""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:19551/api/tasks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:19551/api/tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "19551",
+					"path": [
+						"api",
+						"tasks"
+					]
+				},
+				"description": "Generated from cURL: curl -X GET \"http://localhost:19551/api/tasks\""
+			},
+			"response": []
+		}
+	]
+}
